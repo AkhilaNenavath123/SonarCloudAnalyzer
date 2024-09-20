@@ -3,7 +3,9 @@ import { render, screen } from "@testing-library/react";
 import CardContentMolecule from "./index";
 import Button from "../../atoms/Button";
 
-jest.mock("../../atoms/Button"); // Mock Button component
+jest.mock("../../atoms/Button", () => {
+  return jest.fn(({ children }) => <button>{children}</button>);
+});
 
 describe("CardContentMolecule Component", () => {
   const title = "Card Title";
@@ -20,7 +22,6 @@ describe("CardContentMolecule Component", () => {
     );
   });
 
-  // Test if the component renders correctly with provided props
   test("renders CardContentMolecule with title, description, and button", () => {
     const titleElement = screen.getByText(title);
     const descriptionElement = screen.getByText(description);
@@ -31,7 +32,6 @@ describe("CardContentMolecule Component", () => {
     expect(buttonElement).toBeInTheDocument();
   });
 
-  // Test if the button is rendered as a Button component
   test("renders the button as a Button component", () => {
     expect(Button).toHaveBeenCalledWith(
       expect.objectContaining({ variant: "contained", children: buttonText }),
@@ -39,7 +39,6 @@ describe("CardContentMolecule Component", () => {
     );
   });
 
-  // Test if the correct number of elements are rendered
   test("renders correct number of elements", () => {
     const elements = screen.getAllByText(
       /card title|this is a description of the card|click me/i

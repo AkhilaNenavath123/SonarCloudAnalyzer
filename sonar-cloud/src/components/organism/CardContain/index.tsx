@@ -13,7 +13,7 @@ const CenterWrapper = styled(Box)`
 
 const CardContain: React.FC = () => {
   return (
-    <CenterWrapper>
+    <CenterWrapper data-testid="center-wrapper">
       <CardContentMolecule
         title="Launch a new Cash Kick"
         description="You have upto $0 available for a new cash advance"

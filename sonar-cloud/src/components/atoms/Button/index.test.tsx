@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Button from "./index";
+import Button from "./index"; // Adjust the import path if necessary
 import userEvent from "@testing-library/user-event";
 
 test("renders the Button component", () => {
@@ -22,7 +22,6 @@ test("Button is clickable", async () => {
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
 
-// Test if Button is disabled when the disabled prop is passed
 test("Button is disabled when disabled prop is passed", () => {
   render(<Button disabled>Click Me</Button>);
 
