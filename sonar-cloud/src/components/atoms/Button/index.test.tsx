@@ -11,21 +11,23 @@ test("renders the Button component", () => {
 });
 
 // Test if Button is clickable
-test("Button is clickable", () => {
+test("Button is clickable", async () => {
   const handleClick = jest.fn(); // Mock function to track clicks
   render(<Button onClick={handleClick}>Click Me</Button>);
+
   const buttonElement = screen.getByText(/click me/i);
 
-  // Simulate a click event
-  userEvent.click(buttonElement);
+  // Simulate a click event using `userEvent`
+  await userEvent.click(buttonElement);
 
   // Check if the click handler was called once
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
 
-// Test if Button is disabled
+// Test if Button is disabled when the disabled prop is passed
 test("Button is disabled when disabled prop is passed", () => {
   render(<Button disabled>Click Me</Button>);
+
   const buttonElement = screen.getByText(/click me/i);
 
   // Check if the button is disabled
