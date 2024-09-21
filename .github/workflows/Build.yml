@@ -22,15 +22,13 @@ jobs:
 
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
-      - name: Run Tests
-        run: npm test
+      - name: Test and coverage
+        run: npm run test
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
         with:
           projectBaseDir: ./sonar-cloud # Specify the correct directory
-          args: >
-            -Dsonar.branch.name=${{ github.head_ref }}
+        uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
