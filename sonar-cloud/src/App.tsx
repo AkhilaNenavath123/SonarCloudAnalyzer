@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import CardContain from "./components/organism/CardContain";
+import SimpleButton from "./components/atoms/Button";
 import { Typography } from "@mui/material";
 
 function App() {
   return (
     <div className="App">
-      <CardContain />
+      <SimpleButton />
       <Typography>learn react</Typography>
     </div>
   );
