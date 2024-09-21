@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import SimpleButton from "./components/atoms/Button";
+import SimpleButton from "./components/Button";
 import { Typography } from "@mui/material";
 
 function App() {
