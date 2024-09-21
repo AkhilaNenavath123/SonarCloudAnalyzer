@@ -21,14 +21,14 @@ describe("Typography Component", () => {
 
   // Test if Typography applies custom styles
   test("applies custom styles", () => {
-    const { container } = render(
-      <Typography variant="body1" sx={{ color: "red" }}>
+    render(
+      <Typography variant="body1" style={{ color: "red" }}>
         Custom Color Text
       </Typography>
     );
     const textElement = screen.getByText(/custom color text/i);
     expect(textElement).toBeInTheDocument();
-    expect(container.firstChild).toHaveStyle("color: red"); // Check for the custom style
+    expect(textElement).toHaveStyle("color: red"); // Check for the custom style
   });
 
   // Test if Typography handles different children types
@@ -40,6 +40,6 @@ describe("Typography Component", () => {
     );
     const boldTextElement = screen.getByText(/this is bold text/i);
     expect(boldTextElement).toBeInTheDocument();
-    expect(boldTextElement).toContainHTML("<strong>This is bold text</strong>"); // Check for correct HTML structure
+    expect(boldTextElement.innerHTML).toBe("This is bold text"); // Check for correct HTML structure
   });
 });

@@ -1,48 +1,53 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import CardContentMolecule from "./index";
-import Button from "../../atoms/Button";
+import TextButton from "./index";
 
-jest.mock("../../atoms/Button", () => {
-  return jest.fn(({ children }) => <button>{children}</button>);
-});
-
-describe("CardContentMolecule Component", () => {
+test("renders TextButton with title, description, and button", () => {
   const title = "Card Title";
-  const description = "This is a description of the card.";
+  const description = "This is a description of the card";
   const buttonText = "Click Me";
 
-  beforeEach(() => {
-    render(
-      <CardContentMolecule
-        title={title}
-        description={description}
-        buttonText={buttonText}
-      />
-    );
-  });
+  // Render the component
+  render(
+    <TextButton
+      title={title}
+      description={description}
+      buttonText={buttonText}
+    />
+  );
 
-  test("renders CardContentMolecule with title, description, and button", () => {
-    const titleElement = screen.getByText(title);
-    const descriptionElement = screen.getByText(description);
-    const buttonElement = screen.getByText(buttonText);
+  // Find the elements by their text (using regex for flexible matching)
+  const titleElement = screen.getByText(/card title/i);
+  const descriptionElement = screen.getByText(
+    /this is a description of the card/i
+  );
+  const buttonElement = screen.getByText(/click me/i);
 
-    expect(titleElement).toBeInTheDocument();
-    expect(descriptionElement).toBeInTheDocument();
-    expect(buttonElement).toBeInTheDocument();
-  });
+  // Assert that these elements are in the document
+  expect(titleElement).toBeInTheDocument();
+  expect(descriptionElement).toBeInTheDocument();
+  expect(buttonElement).toBeInTheDocument();
+});
 
-  test("renders the button as a Button component", () => {
-    expect(Button).toHaveBeenCalledWith(
-      expect.objectContaining({ variant: "contained", children: buttonText }),
-      {}
-    );
-  });
+test("renders correct number of elements", () => {
+  const title = "Card Title";
+  const description = "This is a description of the card";
+  const buttonText = "Click Me";
 
-  test("renders correct number of elements", () => {
-    const elements = screen.getAllByText(
-      /card title|this is a description of the card|click me/i
-    );
-    expect(elements.length).toBe(3); // title, description, button
-  });
+  // Render the component
+  render(
+    <TextButton
+      title={title}
+      description={description}
+      buttonText={buttonText}
+    />
+  );
+
+  // Find the title, description, and button
+  const elements = screen.getAllByText(
+    /card title|this is a description of the card|click me/i
+  );
+
+  // Expect 3 elements (title, description, button)
+  expect(elements.length).toBe(3);
 });

@@ -6,12 +6,9 @@ import CardContentMolecule from "../../molecules/TextButton";
 jest.mock("../../molecules/TextButton"); // Mock the CardContentMolecule component
 
 describe("CardContain Component", () => {
-  beforeEach(() => {
-    render(<CardContain />);
-  });
-
   // Test if the CardContentMolecule renders with correct props
   test("renders CardContentMolecule with correct props", () => {
+    render(<CardContain />); // Move render into the test
     expect(CardContentMolecule).toHaveBeenCalledWith(
       expect.objectContaining({
         title: "Launch a new Cash Kick",
@@ -24,6 +21,7 @@ describe("CardContain Component", () => {
 
   // Test if the center wrapper has the correct styles
   test("renders CenterWrapper with correct styles", () => {
+    render(<CardContain />); // Move render into the test
     const centerWrapper = screen.getByTestId("center-wrapper");
     expect(centerWrapper).toBeInTheDocument();
     expect(centerWrapper).toHaveStyle("display: flex");
