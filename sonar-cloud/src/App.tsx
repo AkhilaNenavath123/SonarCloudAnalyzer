@@ -7,10 +7,6 @@ function App() {
     alert("Button clicked!");
   };
 
-  const handleDisabledClick = () => {
-    alert("This button should be disabled");
-  };
-
   return (
     <Box
       display="flex"
@@ -31,9 +27,7 @@ function App() {
       <Button variant="text" color="success">
         Text Button
       </Button>
-      <Button disabled onClick={handleDisabledClick}>
-        Disabled Button
-      </Button>
+      <Button disabled>Disabled Button</Button>
     </Box>
   );
 }
