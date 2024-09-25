@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./test-cases
+        working-directory: ./sonar-cloud
     steps:
       - uses: actions/checkout@v2
         with:
@@ -22,13 +22,15 @@ jobs:
 
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
-      - name: Test and coverage
-        run: npm run test
+      - name: Run Tests
+        run: npm test
 
       - name: SonarCloud Scan
-        with:
-          projectBaseDir: ./test-cases # Specify the correct directory
         uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: ./sonar-cloud # Specify the correct directory
+          args: >
+            -Dsonar.branch.name=${{ github.head_ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -42,8 +44,8 @@ jobs:
         with:
           fetch-depth: 0 # Shallow clones should be disabled for better analysis relevance
 
-      - name: Change directory to test-cases
-        run: cd test-cases # Change to the myap directory
+      - name: Change directory to sonar-cloud
+        run: cd sonar-cloud # Change to the myap directory
 
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
@@ -54,7 +56,7 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:
-          projectBaseDir: ./test-cases # Specify the correct directory
+          projectBaseDir: ./sonar-cloud # Specify the correct directory
           args: >
             -Dsonar.branch.name=main
         env:
